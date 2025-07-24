@@ -13,7 +13,7 @@ class EventPolicy < ApplicationPolicy
   alias custom_notification? edit?
   alias destroy? edit?
   def edit_people?
-    edit?
+    edit? || (user.person && record.people.include?(user.person))
   end
   alias update? edit?
   alias update_state? edit?
