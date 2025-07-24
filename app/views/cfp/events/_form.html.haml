@@ -29,6 +29,7 @@
     = f.button :submit, class: 'primary'
     = link_to t('cancel'), :back, class: "btn"
     = link_to t("events_module.edit_people"), edit_people_event_path(@event), class: 'btn'
+    = link_to t("events_module.rating"), event_event_rating_path(@event), class: 'btn btn-secondary'
 
 
 - if EventAttachment::PRESERVE_FILE_ATTACHMENTS
