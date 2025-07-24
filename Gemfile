@@ -101,6 +101,7 @@ group :development, :test do
   gem 'faker'
   gem 'i18n-tasks'
   gem 'easy_translate'
+  gem 'letter_opener'
 end
 
 group :test do

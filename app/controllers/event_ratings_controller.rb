@@ -22,6 +22,7 @@ class EventRatingsController < BaseConferenceController
 
     @rating = new_event_rating
     if @rating.save
+      RatingMailer.new_rating(@event, @rating).deliver_later
       redirect_to event_event_rating_path, notice: t('ratings_module.notice_rating_created')
     else
       flash[:alert] = t('ratings_module.error_creating', error:  @rating.errors.full_messages.join)
