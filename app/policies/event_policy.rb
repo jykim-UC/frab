@@ -6,15 +6,14 @@ class EventPolicy < ApplicationPolicy
   alias people? show?
 
   def edit?
-    user.is_admin? || user.is_manager_of?(record.conference) || (user.person && record.people.include?(user.person))
+    user.is_admin? || user.is_manager_of?(record.conference)
   end
 
   alias create? edit?
   alias custom_notification? edit?
   alias destroy? edit?
-  # alias edit_people? edit?
   def edit_people?
-    edit? || (user.person && record.people.include?(user.person))
+    edit?
   end
   alias update? edit?
   alias update_state? edit?

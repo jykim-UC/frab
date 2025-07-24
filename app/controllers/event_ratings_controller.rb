@@ -1,6 +1,7 @@
 class EventRatingsController < BaseConferenceController
+  skip_before_action :not_submitter!
   before_action :find_event
-  before_action :crew_only!
+  before_action :require_event_person!
 
   def show
     @rating = @event.event_ratings.find_by(person_id: current_user.person.id) || EventRating.new
@@ -11,9 +12,11 @@ class EventRatingsController < BaseConferenceController
     @rating.review_scores_attributes = missing_ids.map{ |rmid| { review_metric_id: rmid, score: 0} }
 
     setup_batch_reviews_next_event
+    authorize @event
   end
 
   def create
+    authorize @event
     # only one rating allowed, if one exists update instead
     return update if @event.event_ratings.find_by(person_id: current_user.person.id)
 
@@ -27,6 +30,7 @@ class EventRatingsController < BaseConferenceController
   end
 
   def update
+    authorize @event
     @rating = @event.event_ratings.find_by!(person_id: current_user.person.id)
 
     if @rating.update(event_rating_params)
@@ -39,6 +43,7 @@ class EventRatingsController < BaseConferenceController
 
   # DELETE /event_ratings/1
   def destroy
+    authorize @event
     @rating = @event.event_ratings.find_by!(person_id: current_user.person.id)
     @rating.destroy
 
@@ -47,6 +52,16 @@ class EventRatingsController < BaseConferenceController
         redirect_to event_event_rating_path, notice: t('ratings_module.notice_rating_deleted')
       end
     end
+  end
+  
+private
+  def require_event_person!
+    return if current_user.has_role?(@conference, 'orga') ||
+              current_user.has_role?(@conference, 'coordinator') ||
+              current_user.has_role?(@conference, 'reviewer') ||
+              current_user.is_admin?
+    return if @event.people.exists?(user_id: current_user.id)
+    redirect_to root_path, alert: '접근 권한이 없습니다.'
   end
 
   protected
@@ -69,6 +84,7 @@ class EventRatingsController < BaseConferenceController
   # filter according to users abilities
   def find_event
     @event = Event.find(params[:event_id])
+    @conference = @event.conference
     @event_ratings = policy_scope(@event.event_ratings)
   end
 
