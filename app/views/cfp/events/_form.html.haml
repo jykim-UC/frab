@@ -28,9 +28,9 @@
   .actions
     = f.button :submit, class: 'primary'
     = link_to t('cancel'), :back, class: "btn"
-    = link_to t("events_module.edit_people"), edit_people_event_path(@event), class: 'btn'
-    = link_to t("events_module.rating"), event_event_rating_path(@event), class: 'btn btn-secondary'
-
+    - if @event.persisted?
+      = link_to t("events_module.edit_people"), edit_people_event_path(@event), class: 'btn'
+      = link_to t("events_module.rating"), event_event_rating_path(@event), class: 'btn btn-secondary'
 
 - if EventAttachment::PRESERVE_FILE_ATTACHMENTS
   %p{class: 'help-block'}
@@ -41,4 +41,4 @@
   %h3= 'Token: ' + @event.invite_token
   %p{class: 'help-block'}
     = t('cfp.join_submitters_hint')
-    = link_to t('cfp.join_token_link'), cfp_events_join_path(@event.invite_token)
+    = link_to t('cfp.join_token_link'),

@@ -7,7 +7,7 @@ class EventPerson < ApplicationRecord
   ROLES = %i(coordinator submitter speaker moderator assistant).freeze
   STATES = %i(canceled confirmed declined idea offer unclear attending).freeze
   SPEAKERS = %i(speaker moderator).freeze
-  SUBSCRIBERS = %i(speaker moderator assistant).freeze
+  SUBSCRIBERS = %i(speaker moderator assistant submitter).freeze
   JOINABLES = %i(speaker assistant).freeze
 
   belongs_to :event

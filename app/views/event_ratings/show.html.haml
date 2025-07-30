@@ -126,4 +126,4 @@
                       %td= score
                 %td=event_rating.comment
                 - if policy(@conference).manage?
-                  %td= link_to 'Delete', event_event_rating_path(event_rating), method: :delete
+                  %td= link_to 'Delete', event_event_rating_path(event_rating.event), method: :delete
