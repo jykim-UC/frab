@@ -7,10 +7,12 @@ then
     echo "> assets:precompile"
     bundle exec rake assets:precompile
 
-    if [ ! "$(rails db:version)" == "Current version: 0" ]
+    if [ ! "$(bundle exec rails db:version)" == "Current version: 0" ]
     then
         echo "> DB Migrate"
         bundle exec rails db:migrate
+        echo "> DB Seed"
+        bundle exec rails db:seed
     else
         echo "> Setting up new db"
         bundle exec rails db:setup

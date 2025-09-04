@@ -117,3 +117,5 @@ group :doc, optional: true do
   # gem 'rails-erd'      # graph
   # gem 'ruby-graphviz', require: 'graphviz' # Optional: only required for graphing
 end
+
+gem "dockerfile-rails", ">= 1.7", :group => :development
