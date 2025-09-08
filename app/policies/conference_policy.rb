@@ -19,8 +19,6 @@ class ConferencePolicy < ApplicationPolicy
     user.is_admin? || user.is_orga_of?(record)
   end
 
-  alias create? orga?
-
   def manage?
     return false unless user
     return (user.is_admin? || user.any_crew?('orga', 'coordinator')) if record.is_a?(Class)
@@ -33,8 +31,11 @@ class ConferencePolicy < ApplicationPolicy
   end
 
   def new?
-    return false unless user
-    user.is_admin? || user.any_crew?('orga')
+    user.present?
+  end
+
+  def create?
+    user.present?
   end
 
   def destroy?

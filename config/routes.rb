@@ -168,5 +168,8 @@ Rails.application.routes.draw do
     get '/:conference_acronym' => 'conferences#show', as: 'conference_crew'
   end # scope "(:locale)" do
 
-  root to: 'home#index'
+  # root to: 'home#index'
+  devise_scope :user do
+    root to: 'home#index'
+  end
 end

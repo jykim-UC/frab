@@ -1,4 +1,5 @@
 class ConferencesController < BaseConferenceController
+  skip_before_action :not_submitter!, only: [:new, :create]
   include Searchable
   # these methods don't need a conference
   skip_before_action :load_conference, only: %i[new index create]

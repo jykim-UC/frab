@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_06_102553) do
+ActiveRecord::Schema[7.0].define(version: 2025_09_05_091133) do
   create_table "availabilities", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "conference_id"
@@ -317,7 +317,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_102553) do
   create_table "people", force: :cascade do |t|
     t.string "first_name", default: ""
     t.string "last_name", default: ""
-    t.string "public_name", null: false
     t.string "email", null: false
     t.boolean "email_public", default: true
     t.string "gender"
@@ -329,7 +328,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_102553) do
     t.text "description"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.bigint "user_id"
+    t.integer "user_id"
     t.text "note"
     t.boolean "include_in_mailings", default: false, null: false
     t.boolean "use_gravatar", default: false, null: false

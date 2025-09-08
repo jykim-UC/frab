@@ -46,7 +46,7 @@ class User < ApplicationRecord
       self.role ||= 'submitter'
     end
     self.sign_in_count ||= 0
-    self.person ||= Person.new(email: email, public_name: email)
+    self.person ||= Person.new(email: email)
   end
 
   def self.from_omniauth(auth)
@@ -55,7 +55,6 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.password = Devise.friendly_token[0, 20]
       user.person ||= Person.new(email: auth.info.email.downcase,
-                                 public_name: auth.info.name,
                                  first_name: auth.info.first_name,
                                  last_name: auth.info.last_name)
     end

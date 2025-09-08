@@ -53,7 +53,7 @@ class Person < ApplicationRecord
 
   validates_attachment_content_type :avatar, content_type: [/jpg/, /jpeg/, /png/, /gif/]
 
-  validates :public_name, :email, presence: true
+  validates :first_name, :last_name, :email, presence: true
 
   # validates_inclusion_of :gender, in: GENDERS, allow_nil: true
 
@@ -70,6 +70,10 @@ class Person < ApplicationRecord
     joins(events: :conference).where('conferences.id': conference).where('events.state': %w(confirmed scheduled))
   }
 
+  def public_name
+    "#{first_name} #{last_name}"
+  end
+
   def self.fullname_options
     all.sort_by(&:full_name).map do |p|
       { id: p.id, text: p.full_name_annotated }
@@ -81,15 +85,11 @@ class Person < ApplicationRecord
   end
 
   def name
-    public_name
+    "#{first_name} #{last_name}"
   end
 
   def full_name
-    if first_name.blank? or last_name.blank?
-      public_name
-    else
-      "#{first_name} #{last_name}"
-    end
+    "#{first_name} #{last_name}"
   end
 
   def full_name_annotated

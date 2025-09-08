@@ -2,13 +2,22 @@
 
 ### SetUp
 
+- 아래 코드로 public_name column 제거
+  ```
+  rails generate migration RemovePublicNameFromPeople public_name:string
+  rails db:migrate
+  ```
+
 - 터미널에서 아래 명령어 입력하여 모델에 position 컬럼 추가(저자 순서 저장용)
 
-  - ```rails generate migration AddPositionToEventPeople position:integer```
+  ```
+  rails generate migration AddPositionToEventPeople
+  position:integer
+  rails db:migrate
+  bin/setup
+  ```
 
-  - ```rails db:migrate```
-
-  - ```bin/setup```
+  일단 배포된 컨터이너에 접속해서 콘솔에 위 코드 입력하기
 
 ### Fly.io에 런치
 
@@ -41,7 +50,8 @@ User.create!(
   confirmed_at: Time.current,
   person_attributes: {
     email: 'user2@uclab.re.kr',
-    public_name: 'user2'
+    first_name: 'Juyoung',
+    last_name: 'Kim'
   }
 )
 ```
@@ -72,14 +82,14 @@ juyoung
 ```
 
 ### 요구사항 (이다스 참고하기)
-1. 웹사이트 메인화면 rab으로 뜨는 것 수정하기 => 뭐라도 다른걸로 바꾸기,도메인 살 수 있는거 고려해서 이름 바꾸기
+1. ~~이름(퍼블릭네임 빼기) 미들네임 설네임 등 넣기~~
 
-2. 리스트 오브 컨퍼런스는 로그인하고 나서 보여주기
+2. ~~리스트 오브 컨퍼런스는 로그인하고 나서 보여주기~~
 
-3. 보안 관련해서 캡챠 쓰기 (클라우드플레어)
+3. ~~리뷰어, 등등 권한 확인할 수 있는 페이지 만들기~~
 
-4. 이름(퍼블릭네임 빼기) 미들네임 설네임 등 넣기
+4. ~~일반 계정도 컨퍼런스 만드는 기능 넣기 (만들고 운영자가 컨펌하는 느낌으로)~~
 
-5. 일반 계정도 컨퍼런스 만드는 기능 넣기 (만들고 운영자가 컨펌하는 느낌으로)
+5. 보안 관련해서 캡챠 쓰기 (클라우드플레어)
 
-6. 리뷰어, 등등 권한 확인할 수 있는 페이지 만들기
+6. 웹사이트 메인화면 frab으로 뜨는 것 수정하기 => 뭐라도 다른걸로 바꾸기,도메인 살 수 있는거 고려해서 이름 바꾸기
