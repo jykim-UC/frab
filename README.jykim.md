@@ -21,15 +21,30 @@
 
 ### Fly.io에 런치
 
-```fly launch```
+```
+fly launch
+```
 
 - 머신 용량은 적어도 1GB
 - 관리자 계정은 db:seed가 실행이 되어야 생성됨(db:setup에 포함됨)
 - 스크립트에 안넣었으면 콘솔로 들어가서 직접 실행하기
 
-```fly ssh console --app frab-app```
+```
+fly ssh console --app frab-app
+```
 
 rails 콘솔:  RAILS_ENV=production bundle exec rails console
+
+### 배포
+
+- 개발 완료하면
+
+```
+fly deploy
+```
+
+참고로 `docker-cmd.sh`에 항상 마이그레이션 하도록 설정해둠
+
 
 ### 사용자 추가
 
