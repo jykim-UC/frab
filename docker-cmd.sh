@@ -11,8 +11,8 @@ then
     then
         echo "> DB Migrate"
         bundle exec rails db:migrate
-        echo "> DB Seed"
-        bundle exec rails db:seed
+        # echo "> DB Seed"
+        # bundle exec rails db:seed
     else
         echo "> Setting up new db"
         bundle exec rails db:setup
