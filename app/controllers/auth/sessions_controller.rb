@@ -15,9 +15,15 @@ class Auth::SessionsController < Devise::SessionsController
  
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    if verify_recaptcha
+      super
+    else
+      flash[:alert] = "reCAPTCHA 인증에 실패했습니다."
+      self.resource = resource_class.new(sign_in_params)
+      render :new
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy
