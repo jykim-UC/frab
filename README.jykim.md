@@ -11,15 +11,21 @@
 - 터미널에서 아래 명령어 입력하여 모델에 position 컬럼 추가(저자 순서 저장용)
 
   ```
-  rails generate migration AddPositionToEventPeople
-  position:integer
+  rails generate migration AddPositionToEventPeople position:integer
+  rails db:migrate
+  ```
+
+- 회원가입 시 소속/국가 필수 필드 추가
+
+  ```
+  rails generate migration AddAffiliationAndCountryToPeople affiliation:string country:string
   rails db:migrate
   bin/setup
   ```
 
   일단 배포된 컨터이너에 접속해서 콘솔에 위 코드 입력하기
 
-- 이거 하나로 퉁칠 수 있는 듯?
+- 배포 환경에는 마이그레이션 파일들이 이미 있으니 아래 명령어만..
 
   ```
   sudo bin/rails db:migrate
@@ -101,7 +107,9 @@ User.create!(
   person_attributes: {
     email: 'user2@uclab.re.kr',
     first_name: 'Juyoung',
-    last_name: 'Kim'
+    last_name: 'Kim',
+    affiliation: 'UC Lab',
+    country: 'South Korea'
   }
 )
 ```

@@ -14,8 +14,9 @@ then
         # echo "> DB Seed"
         # bundle exec rails db:seed
     else
-        echo "> Setting up new db"
-        bundle exec rails db:setup
+        echo "> Setting up new db (managed DB)"
+        bundle exec rails db:schema:load
+        bundle exec rails db:seed
     fi
 elif [ $RACK_ENV == "development" ]
 then
