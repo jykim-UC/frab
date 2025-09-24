@@ -160,7 +160,7 @@ class PeopleController < BaseConferenceController
   def person_params
     params.require(:person).permit(
       :first_name, :last_name, :public_name, :email, :email_public, :gender, :avatar,
-      :include_in_mailings, :note,
+      :affiliation, :country, :include_in_mailings, :note,
       *translated_person_params,
       im_accounts_attributes: %i(id im_type im_address _destroy),
       languages_attributes: %i(id code _destroy),

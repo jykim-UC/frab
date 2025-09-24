@@ -2,5 +2,7 @@
   %legend= t('basic_information')
   = f.input :first_name
   = f.input :last_name
+  = f.input :affiliation
+  = f.input :country, as: :string
   - unless ENV['DISABLE_FRAB_GENDER_FIELD'].present?
     = f.input :gender, collection: translated_options(Person::GENDERS)

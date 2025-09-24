@@ -53,7 +53,7 @@ class Person < ApplicationRecord
 
   validates_attachment_content_type :avatar, content_type: [/jpg/, /jpeg/, /png/, /gif/]
 
-  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :email, :affiliation, :country, presence: true
 
   # validates_inclusion_of :gender, in: GENDERS, allow_nil: true
 
