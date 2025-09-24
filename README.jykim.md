@@ -19,6 +19,12 @@
 
   일단 배포된 컨터이너에 접속해서 콘솔에 위 코드 입력하기
 
+- 이거 하나로 퉁칠 수 있는 듯?
+
+  ```
+  sudo bin/rails db:migrate
+  ```
+
 ### Fly.io에 런치
 
 ```
@@ -44,6 +50,35 @@ fly deploy
 ```
 
 참고로 `docker-cmd.sh`에 항상 마이그레이션 하도록 설정해둠
+
+### 환경변수
+
+- 리캡챠
+
+  - RECAPTCHA_SECRET_KEY=~~~
+
+  - RECAPTCHA_SITE_KEY=~~~
+
+- 인증 (Google SMTP)
+
+  ```
+  fly secrets set \
+    FRAB_HOST= \
+    FRAB_PROTOCOL= \
+    FROM_EMAIL= \
+    SMTP_ADDRESS= \
+    SMTP_PORT= \
+    SMTP_DOMAIN= \
+    SMTP_USER_NAME= \
+    SMTP_PASSWORD= \
+    SMTP_AUTHENTICATION= \
+    SMTP_NOTLS=
+  ```
+
+
+- 인증 (Google Auth)
+
+  - 
 
 
 ### 사용자 추가
