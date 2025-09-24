@@ -12,7 +12,9 @@ PaperTrail.enabled = false
 person = Person.create!(
   email: 'admin@example.org',
   first_name: 'admin',
-  last_name: 'admin'
+  last_name: 'admin',
+  affiliation: 'System',
+  country: 'N/A'
 )
 
 password = Rails.env.production? ? SecureRandom.urlsafe_base64(32) : 'test123'
