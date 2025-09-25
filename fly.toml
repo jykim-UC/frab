@@ -25,3 +25,7 @@ console_command = '/rails/bin/rails console'
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
+
+[env]
+  RACK_ENV = "production"
+  RAILS_ENV = "production"
